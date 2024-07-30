@@ -4,9 +4,10 @@ devise_for :users
 root to: "homes#top"
 
 get 'homes/about' => 'homes#about', as: 'about'
-get '/mypage' => 'users#mypage'
 get 'homes/top' => 'homes#top' 
 resources :posts, only: [:new, :create, :index, :show, :destroy]
-resources :users, only: [:show, :edit, :update]
-
+resources :users, only: [:show, :edit, :update, :destroy]
+get '/users/:name', to: 'users#show' 
+get '/users/:user_name/edit', to: 'users#edit'
+  
 end

@@ -1,34 +1,41 @@
 class UsersController < ApplicationController
   
   
-  
-  def mypage
-    @user = current_user
-    @posts = @user.posts  
-  end
-  
   def show
-    @user = User.find(params[:id])
-    @posts = @user.posts  
+      
+     @user = User.find_by(name: params[:id])
+    
+      if @user
+        @name = @user.name
+        @posts = @user.posts  
+      else
+        redirect_to root_path, alert: "User not found"
+      end
+      
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by(name: params[:id])
+
+    if @user
+      @name = @user.name
+    else
+      redirect_to user_path, alert: "User not found"
+    end
   end
   
   def update
     @user = User.find(params[:id])
-    
+
     if params[:user][:remove_profile_image] == '1'
       @user.profile_image.purge
     end
-    
+
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to user_path
     else
       render :edit
     end
-    
   end
 
 
