@@ -1,20 +1,40 @@
-<div>
-  <h3><%= @name %></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p><%= link_to "プロフィール編集","/users/#{current_user.name}/edit" %></p>
-</div>
+<body style="margin: 0; height: 100%; display: flex; flex-direction: column; ">
 
-
-<% @posts.each do |posts| %>
-
-  <div>
+  <div style="height: 20%;  display: flex; flex-direction: row; background-color:#B8860B;">
+  
+    <div style="height: 20%; padding:20px;">
+      <%= image_tag @user.get_profile_image(200,200) %>
+    </div>
     
-    <%= link_to post_path(posts.id) do %>
-      <%= image_tag posts.get_image %>
-    <% end %>
-    <p>城名：<%= posts.castle_name %></p>
-    <p>本文：<%= posts.body %></p>
+    <div style="padding:20px; display: flex; ">
+      <b style="font-size:30px;">
+        
+        <%= @name %>
+        
+        <p style="display: flex; align-items: flex-end;">
+          <%= link_to "プロフィール編集","/users/#{current_user.name}/edit", class: "btn btn-success" %>
+        </p>
+        
+      </b>
+      
+    </div>
+    
     
   </div>
-
-<% end %>
+  
+  <div style="height: 70%; display: flex; flex-direction: column;">
+    <% @posts.each do |posts| %>
+    
+      <div>
+        
+        <%= link_to post_path(posts.id) do %>
+          <%= image_tag posts.get_image %>
+        <% end %>
+        <p>城名：<%= posts.castle_name %></p>
+        <p>本文：<%= posts.body %></p>
+        
+      </div>
+    <% end %>
+  </div>
+  
+</body>

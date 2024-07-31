@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if params[:user][:remove_profile_image] == '1'
+    if params[:user] && params[:user][:remove_profile_image] == '1'
       @user.profile_image.purge
     end
 
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :remove_profile_image)
   end
   
 end
