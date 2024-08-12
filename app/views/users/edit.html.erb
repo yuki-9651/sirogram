@@ -1,52 +1,38 @@
 <body style="margin: 0; height: 100%;">
-  
-  <div style="display: flex; justify-content: space-between; height: 20%; background-color: #B8860B;">
-  
-   <div style= "width:15%; padding-top: 20px; padding-left:30px;">
-     <h2>編集画面</h2>
-   </div>
-   
-   <div style= "width:30%; padding: 20px;">
-     <%= form_with model: @user do |f| %>
-       <h3 for="inputName">お名前</h3>
-       <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
-     <% end %>
-   </div>
-   
-   <div style= "width:30%; padding-top: 20px;">
-     <%= form_with model: @user do |f| %>
-     
-       <b for="inputImage">プロフィール画像</b>
-       
-       <% if @user.profile_image.attached? %>
-          <div>
-            <%= image_tag @user.profile_image, size: "100x100" %>
-            
+  <div style="display: flex; height: 100%; background-color: #B8860B; padding: 20px;">
+    
+    <div style="flex: 1;">
+      <h2>編集画面</h2>
+    </div>
+
+    <div style="flex: 3; display: flex;">
+      <%= form_with model: @user do |f| %> 
+        <div style="flex: 1; padding-bottom: 30px;">
+          <h3 for="inputName">お名前</h3>
+          <%= f.text_field :name, autofocus: true, id: "inputName", placeholder: "名前" %>
+        </div>
+
+        <div style="flex: 1; padding-bottom: 30px;">
+          <b for="inputImage">プロフィール画像</b>
+
+          <% if @user.profile_image.attached? %>
             <div>
+              <%= image_tag @user.profile_image, size: "100x100" %>
               <%= f.check_box :remove_profile_image %>
               <%= f.label :remove_profile_image, "プロフィール画像を削除" %>
             </div>
-            
+          <% end %>
+        </div>
+
+        <div style="flex: 1;">
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+          <div class="actions" style="padding-top: 30px;">
+            <%= f.submit "変更を保存" %>
           </div>
-        <% end %>
-        
-     <% end %>
-   </div>
-   
-   <div style= "width:25%; padding: 20px;">
-     <%= form_with model: @user do |f| %>
+        </div>
+      <% end %>
+    </div>
      
-      <div>  
-        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-      </div>
-      <div class="actions" style= "padding-top: 20px;">
-        <%= f.submit "変更を保存" %>
-      </div>
-              
-     <% end %>
-   </div>
-
-  
   </div>
-
 </body>
+
