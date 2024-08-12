@@ -1,1 +1,12 @@
-<h1>投稿一覧</h1>
+<% @post.each do |post| %>
+
+  <div>
+    
+    <p>投稿ユーザー画像：<%= image_tag 'no_image.jpg' %></p>
+    <p>ユーザーネーム：<%= post.user.name %></p>
+    <%= image_tag post.get_image %>
+    <p>城名：<%= post.castle_name %></p>
+    <p>投稿本文：<%= post.body %></p>
+    
+  </div>
+<% end %>
