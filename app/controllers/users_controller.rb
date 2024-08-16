@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     
       if @user
         @name = @user.name
-        @posts = @user.posts  
+        @posts = @user.posts.page(params[:page])
       else
         redirect_to root_path, alert: "User not found"
       end

@@ -8,7 +8,9 @@ get 'homes/top' => 'homes#top'
 resources :posts, only: [:new, :create, :index, :show, :destroy] do 
   resources :post_comments, only: [:create]
 end
-resources :users, only: [:show, :edit, :update, :destroy]
+resources :users, only: [:show, :edit, :update, :destroy] do
+  resources :posts, only: [:index]
+end
 get '/users/:name', to: 'users#show' 
 get '/users/:user_name/edit', to: 'users#edit'
   

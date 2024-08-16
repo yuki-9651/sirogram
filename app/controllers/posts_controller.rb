@@ -8,11 +8,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to posts_path
+    redirect_to new_post_path
   end
   
   def index
-    @post = Post.all
+    @post = Post.page(params[:page])
   end
   
   def show

@@ -1,12 +1,24 @@
-<% @post.each do |post| %>
 
-  <div>
+<div style="display: flex; padding-top: 60px; padding-bottom: 60px; ">
+
+    <div class="col-lg-2" >
+    </div>    
+    <div class="col-lg-8" style="display: flex; flex-wrap: wrap; ">
+      
+      <% @post.each do |post| %>
+        <div style="width: 30%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
+          
+          <%= link_to post_path(post.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
+            <%= image_tag post.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+          <% end %>
+          
+        </div>
+      <% end %>
+      <%= paginate @post %>
+      
+    </div>
+    <div class="col-lg-2" >
+    </div>
     
-    <p>投稿ユーザー画像：<%= image_tag 'no_image.jpg' %></p>
-    <p>ユーザーネーム：<%= post.user.name %></p>
-    <%= image_tag post.get_image %>
-    <p>城名：<%= post.castle_name %></p>
-    <p>投稿本文：<%= post.body %></p>
-    
-  </div>
-<% end %>
+</div>
+

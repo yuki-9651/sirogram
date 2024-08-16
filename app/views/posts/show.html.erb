@@ -1,0 +1,8 @@
+          <%= image_tag 'no_image.jpg' %>
+          
+          <p>ユーザーネーム：<%= post.user.name %></p>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image %>
+          <% end %>
+          <p>城名：<%= post.castle_name %></p>
+          <p>投稿本文：<%= post.body %></p>
