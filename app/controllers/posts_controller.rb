@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to new_post_path
+    redirect_to post_path(@post)
   end
   
   def index
@@ -16,10 +16,16 @@ class PostsController < ApplicationController
   end
   
   def show
-    @post = Post.new
+    @post = Post.find(params[:id])
+    @user = @post.user
     @comment = Comment.new
   end
   
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
+  end
   
   def post_params
     params.require(:post).permit(:castle_name, :image, :body)

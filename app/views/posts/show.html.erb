@@ -1,8 +1,32 @@
-          <%= image_tag 'no_image.jpg' %>
           
-          <p>ユーザーネーム：<%= post.user.name %></p>
-          <%= link_to post_path(post.id) do %>
-            <%= image_tag post.get_image %>
+  <div style = "height:100%; background-color: #B8860B;">  
+  
+     <div style = "display:flex; margin:30px;"> 
+     
+        <div style = "margin-right:80px;">
+          <%= image_tag @user.get_profile_image(200,200) %>
+          <h3><%= @post.user.name %></h3>
+        </div>
+        <div>
+          <%= link_to post_path(@post.id) do %>
+            <%= image_tag @post.get_image, size: "400x400" %>
           <% end %>
-          <p>城名：<%= post.castle_name %></p>
-          <p>投稿本文：<%= post.body %></p>
+        </div>
+        <div style = "margin:30px;" >
+          <% if @post.user == current_user %>
+            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-success" %>
+          <% end %>
+        </div> 
+        <div>   
+          <div style = "margin-bottom:30px; max-width: 200px;">  
+            <h3>城名：<%= @post.castle_name %></h3>
+          </div>
+          
+          <div style = "word-wrap: break-word; word-break: break-all;">
+            <h5><%= @post.body %></h5>
+          </div>
+        </div> 
+    
+     </div>
+     
+  </div>

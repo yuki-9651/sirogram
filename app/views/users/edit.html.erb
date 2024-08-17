@@ -17,7 +17,7 @@
 
           <% if @user.profile_image.attached? %>
             <div>
-              <%= image_tag @user.profile_image, size: "100x100" %>
+              <%= image_tag @user.profile_image, size: "200x200" %>
               <%= f.check_box :remove_profile_image %>
               <%= f.label :remove_profile_image, "プロフィール画像を削除" %>
             </div>

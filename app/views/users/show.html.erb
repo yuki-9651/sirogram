@@ -22,20 +22,24 @@
     
   </div>
   
-  <div style="height: 70%; display: flex; flex-direction: column;">
-    <% @posts.each do |posts| %>
-    
-      <div>
-        
-        <%= link_to post_path(posts.id) do %>
-          <%= image_tag posts.get_image %>
-        <% end %>
-        <p>城名：<%= posts.castle_name %></p>
-        <p>本文：<%= posts.body %></p>
-        
-      </div>
-    <% end %>
-    <%= paginate @posts %>
+  <div style="height: 70%; display: flex; padding-top: 30px; margin-bottom: 30px; ">
+
+    <div class="col-lg-2" >
+    </div>    
+    <div class="col-lg-8" style="display: flex; flex-wrap: wrap; ">
+      
+      <% @posts.each do |posts| %>
+        <div style="width: 30%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
+          
+          <%= link_to post_path(posts.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
+            <%= image_tag posts.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+          <% end %>
+
+          
+        </div>
+      <% end %>
+      <%= paginate @posts %>
+      
+    </div>
+    <div class="col-lg-2" >
   </div>
-  
-</body>

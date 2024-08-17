@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         @name = @user.name
         @posts = @user.posts.page(params[:page])
       else
-        redirect_to root_path, alert: "User not found"
+        redirect_to root_path, alert: "ユーザーが見つかりません"
       end
       
   end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if @user
       @name = @user.name
     else
-      redirect_to user_path, alert: "User not found"
+      redirect_to user_path, alert: "ユーザーが見つかりません"
     end
   end
   
