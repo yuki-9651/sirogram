@@ -1,4 +1,4 @@
-          
+<%# 投稿部分 %>       
   <div style = "height:100%; background-color: #B8860B;">  
   
      <div style = "display:flex; margin:30px;"> 
@@ -29,4 +29,26 @@
     
      </div>
      
+<%# コメント部分 %>
+  <div style = "margin:20px;">
+      <div>
+        <%= form_with model: [@post, @comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+     </div>
+    
+     <div style = "word-wrap: break-word; word-break: break-all;">
+      <p>コメント件数：<%= @post.comments.count %></p>
+        
+      <% @post.comments.each do |comment| %>
+        <p>@<%= comment.user.name %>
+        <%= comment.created_at.strftime('%Y/%m/%d') %>
+        <%= comment.comment %></p>
+      <% end %>
+     </div>
+
+      <%#<p><%= link_to "#{@post.comments.count} コメント", post_path(@post.id) %></p>
+      
   </div>
+  
