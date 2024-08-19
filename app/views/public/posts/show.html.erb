@@ -14,7 +14,7 @@
         </div>
         <div style = "margin:30px;" >
           <% if @post.user == current_user %>
-            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-success" %>
+            <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-success" , data: { confirm: '本当に削除しますか？' } %>
           <% end %>
         </div> 
         <div>   
