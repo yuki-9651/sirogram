@@ -32,15 +32,13 @@ class Public::UsersController < ApplicationController
     end
 
     if @user.update(user_params)
-      redirect_to user_path
+      redirect_to user_path(@user), notice: "プロフィールが更新されました"
     else
       render :edit
     end
   end
   
   
-
-
   private
   
   def set_user
@@ -52,3 +50,4 @@ class Public::UsersController < ApplicationController
   end
   
 end
+
