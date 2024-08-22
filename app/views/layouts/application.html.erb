@@ -35,7 +35,9 @@
                   <%= link_to '新規投稿', new_post_path, class: 'nav-link text-light' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to 'マイページ', "/users/#{current_user.name}", class: 'nav-link text-light' %>
+                  <% if current_user %>
+                    <%= link_to 'マイページ', user_show_by_name_path(current_user.name), class: 'nav-link text-light' %>
+                  <% end %>
                 </li>
                 
               <% else %>
