@@ -20,16 +20,17 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
 
-    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+    resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
     end
-
+    get '/users/:name', to: 'users#show', as: 'user_show_by_name'
+    get '/users/:user_name/edit', to: 'users#edit', as: 'edit_user_by_name'
+    
     resources :users, only: [:show, :edit, :update, :destroy] do
       resources :posts, only: [:index]
     end
 
-    # カスタムルートは resources の後に定義
-    get '/users/:name', to: 'users#show', as: 'user_show_by_name'
-    get '/users/:user_name/edit', to: 'users#edit', as: 'edit_user_by_name'
+ 
+
   end
 end

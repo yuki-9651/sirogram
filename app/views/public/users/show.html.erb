@@ -12,7 +12,7 @@
         <%= @name %>
         
         <p style="display: flex; align-items: flex-end;">
-          <%= link_to "プロフィール編集","/users/#{current_user.name}/edit", class: "btn btn-success" %>
+          <%= link_to "プロフィール編集",edit_user_by_name_path(current_user.name), class: "btn btn-success" %>
         </p>
         
       </b>

@@ -1,0 +1,29 @@
+<div style="display: flex; height: 100%; background-color: #B8860B; padding: 20px;">
+
+   <div style="flex: 1;">
+     <h2>編集画面</h2>
+   </div>
+    
+   <div style="flex: 3; display: flex;">
+      <%= form_with model: @post do |f| %>
+      <div style="flex: 1; padding-bottom: 30px;">
+         <h3>城名</h3>
+         <%= f.text_field :castle_name %>
+      </div>  
+      <div style="flex: 1; padding-bottom: 30px;"> 
+         <h3>画像</h3>
+         <p style = "padding-bottom: 10px;"><%= f.file_field :image, accept: "image/*" %></p>
+         <p>※画像を変更・編集する場合はこちらから選択してください</p>
+      </div>   
+      <div style="flex: 1; padding-bottom: 50px;">  
+         <h3>投稿本文</h3>
+         <%= f.text_area :body , class: 'form-control', cols:50, rows:5%>
+      </div>   
+      <div style="flex: 1; ">
+        <%= f.submit '変更を保存' , class: "btn btn-success" %>
+      </div>
+   </div>
+      
+    <% end %>
+
+</div>

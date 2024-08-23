@@ -2,13 +2,14 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find_by(name: params[:name])
-    
+  
     if @user
       @name = @user.name
       @posts = @user.posts.page(params[:page])
     else
       redirect_to root_path, alert: "ユーザーが見つかりません"
     end
+    
   end
   
   def edit
@@ -36,7 +37,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :user_name, :profile_image, :remove_profile_image)
+    params.require(:user).permit(:name, :profile_image, :remove_profile_image)
   end
   
 end
