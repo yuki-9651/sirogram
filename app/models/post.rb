@@ -3,6 +3,11 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_one_attached :image
+  has_many :likes, dependent: :destroy
+  
+  def favorited_by?(user)
+    likes.exists?(user_id: user.id)
+  end
   
   def get_image
     unless image.attached?
