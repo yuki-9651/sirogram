@@ -13,6 +13,7 @@ class Public::PostsController < ApplicationController
   
   def index
     @post = Post.page(params[:page])
+    
   end
   
   def show

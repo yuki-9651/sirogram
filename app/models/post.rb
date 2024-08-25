@@ -25,4 +25,8 @@ class Post < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
+  def self.looks(search, castle_name)
+      @post = Post.where("name LIKE?","%#{castle_name}%")
+  end
+  
 end

@@ -14,24 +14,22 @@ Rails.application.routes.draw do
       registrations: 'public/registrations',
       passwords: 'public/passwords'
     }
-
+  
     root to: "homes#top"
-
+  
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
-
+    get 'searches', to: 'searches#search', as: 'search' # ここはpublic名前空間が自動適用されます
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
     end
     get '/users/:name', to: 'users#show', as: 'user_show_by_name'
     get '/users/:user_name/edit', to: 'users#edit', as: 'edit_user_by_name'
-    
+   
     resources :users, only: [:show, :edit, :update, :destroy] do
       resources :posts, only: [:index]
     end
-
- 
-
   end
+
 end

@@ -5,20 +5,27 @@
     </div>  
     <div class="col-lg-1" >
     </div>  
-    <div class="col-lg-8" style="display: flex; flex-wrap: wrap; padding-top: 60px; padding-bottom: 60px;  ">
-      
-      <% @post.each do |post| %>
-        <div style="width: 33%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
-          
-          <%= link_to post_path(post.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
-            <%= image_tag post.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+    <div  class="col-lg-8" >
+        <div style="padding-top: 30px;">
+          <%= form_with url: search_path, local: true, method: :get do |f| %>
+            <%= f.text_field :castle_name %>
+            <%= f.select :range, options_for_select([['ユーザー'], ['投稿']]) %>
+            <%= f.submit "検索", class: "btn btn-primary" %>
           <% end %>
-          
         </div>
-      <% end %>
-      <%= paginate @post %>
-      
-    </div>
+        <div style="display: flex; flex-wrap: wrap; padding-top: 30px; padding-bottom: 60px;  ">
+              <% @post.each do |post| %>
+                <div style="width: 33%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
+                  
+                  <%= link_to post_path(post.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
+                    <%= image_tag post.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+                  <% end %>
+                  
+                </div>
+              <% end %>
+        </div>
+        <%= paginate @post %>
+    </div>    
     <div class="col-lg-1" >
     </div>  
     <div class="col-lg-1" style="background-color: #B8860B;" >
