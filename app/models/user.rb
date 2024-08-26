@@ -20,6 +20,7 @@ class User < ApplicationRecord
   end
   
   def self.looks(search, name)
-      @user = User.where("name LIKE?","%#{name}%")
-  end  
+    User.where("name LIKE ?", "%#{name}%")
+  end
+
 end

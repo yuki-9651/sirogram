@@ -12,7 +12,9 @@
         <%= @name %>
         
         <p style="display: flex; align-items: flex-end;">
-          <%= link_to "プロフィール編集",edit_user_by_name_path(current_user.name), class: "btn btn-success" %>
+          <% if @user == current_user %>
+            <%= link_to "プロフィール編集",edit_user_by_name_path(current_user.name), class: "btn btn-success" %>
+          <% end %>
         </p>
         
       </b>

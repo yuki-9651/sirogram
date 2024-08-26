@@ -26,7 +26,7 @@ class Post < ApplicationRecord
   end
   
   def self.looks(search, castle_name)
-      @post = Post.where("name LIKE?","%#{castle_name}%")
+    Post.where("castle_name LIKE ?", "%#{castle_name}%")
   end
   
 end

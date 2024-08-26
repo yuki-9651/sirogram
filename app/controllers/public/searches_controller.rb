@@ -5,8 +5,8 @@ class Public::SearchesController < ApplicationController
   def search
     @range = params[:range]
 
-    if @range == "ユーザー"
-      @user = User.looks(params[:search], params[:name])
+    if @range == 'ユーザー'
+      @users = User.looks(params[:search], params[:castle_name])
     else
       @posts = Post.looks(params[:search], params[:castle_name])
     end
