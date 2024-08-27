@@ -7,9 +7,9 @@ class Public::UsersController < ApplicationController
       @name = @user.name
       @posts = @user.posts.page(params[:page])
     else
-      redirect_to root_path, alert: "ユーザーが見つかりません"
+      redirect_to root_path
     end
-    
+   
   end
   
   def edit
@@ -17,7 +17,7 @@ class Public::UsersController < ApplicationController
     if @user
       @name = @user.name
     else
-      redirect_to user_path, alert: "ユーザーが見つかりません"
+      redirect_to user_path
     end
   end
 
