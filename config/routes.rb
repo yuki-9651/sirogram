@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:destroy]
+    resources :posts, only: [:index, :show, :destroy, :edit] 
+    resources :comments, only: [:index, :destroy]
   end
 
   scope module: :public do
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
   
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
-    get 'searches', to: 'searches#search', as: 'search' # ここはpublic名前空間が自動適用されます
+    get 'searches', to: 'searches#search', as: 'search' 
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
