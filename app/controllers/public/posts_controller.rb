@@ -5,15 +5,35 @@ class Public::PostsController < ApplicationController
   end
   
   def create
+    
     @post = Post.new(post_params)
+    tag_list = params[:post][:tag_name].split(nil)
+    @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
-    @post.save
-    redirect_to post_path(@post)
+    
+    if @post.save
+       @post.save_posts(tag_list)
+      redirect_to post_path(@post)
+    else
+      flash.now[:alert] = '投稿に失敗しました'
+      render 'new'
+    end
+    
   end
   
   def index
     @post = Post.page(params[:page])
     
+    if params[:search].present?
+      posts = Post.posts_serach(params[:search])
+    elsif params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      posts = @tag.items.order(created_at: :desc)
+    else
+      posts = Post.all.order(created_at: :desc)
+    end
+    
+    @tag_lists = Tag.all
   end
   
   def show

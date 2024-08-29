@@ -20,7 +20,12 @@
         
         <div style="flex: 1; padding-bottom: 30px;">
           <h3>投稿本文</h3>
-          <%= f.text_area :body , class: 'form-control', cols:50, rows:5%>
+          <%= f.text_area :body , class: 'form-control', cols:50, rows:5 %>
+        </div>
+        
+        <div style="flex: 1; padding-bottom: 30px;">
+          <h3>タグ</h3>
+          <%= f.text_area :tag_name , class: 'form-control' %>
         </div>
         
         <div style="flex: 1; padding-bottom: 30px;">

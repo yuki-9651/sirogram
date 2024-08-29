@@ -1,55 +1,61 @@
 <div style="display: flex; align-items: stretch;">
   
-    <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;">
-    </div>  
+  <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;">
+  </div>  
+  
+  <div class="col-lg-10">   
+    <h2>検索結果</h2>
     
-    <div class="col-lg-10">   
-        <h2>検索結果</h2>
-        
-        <table class="table table-hover table-inverse">
-          <% if @range == "ユーザー" %>
-            <tbody>
-              <thead class="thead-dark">
-                <tr>
-                  <th>名前</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <% @users.each do |user| %>
-                <tr style="height: auto;">
-                  <td style="word-break: break-all;"><%= user.name %></td>
-                  <td style="word-break: break-all;"><%= image_tag user.get_profile_image(100,100) %></td>
-                  <td><%= link_to "詳細を見る", user_show_by_name_path(user.name), class: "btn btn-success" %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          <% else %>
-            <tbody>
-              <thead class="thead-dark">
-                <tr>
-                  <th>名前</th>
-                  <th></th>
-                  <th>城名</th>
-                  <th>コメント</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <% @posts.each do |post| %>
-                <tr style="height: auto;">
-                  <td style="word-break: break-all;"><%= post.user.name %></td>
-                  <td style="word-break: break-all;"><%= image_tag post.user.get_profile_image(100,100) %></td>
-                  <td style="word-break: break-all;"><%= post.castle_name %></td>
-                  <td style="word-break: break-all;"><%= post.body.truncate(50) %></td>
-                  <td><%= link_to "詳細を見る", post_path(post), class: "btn btn-success" %></td>
-                </tr>
-              <% end %>
-            </tbody>
+    <table class="table table-hover table-inverse">
+      <% if @range == "ユーザー" %>
+        <thead class="thead-dark">
+          <tr>
+            <th>名前</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr style="height: auto;">
+              <td style="word-break: break-all;"><%= user.name %></td>
+              <td style="word-break: break-all;"><%= image_tag user.get_profile_image(100,100) %></td>
+              <td><%= link_to "詳細を見る", user_show_by_name_path(user.name), class: "btn btn-success" %></td>
+            </tr>
           <% end %>
-        </table>
-    </div>
-    
-    <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;">
-    </div>  
-    
+        </tbody>
+      <% elsif @posts.present? %> 
+        <ul>
+          <% @posts.each do |post| %>
+            <li><%= post.title %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <thead class="thead-dark">
+          <tr>
+            <th>名前</th>
+            <th></th>
+            <th>城名</th>
+            <th>コメント</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr style="height: auto;">
+              <td style="word-break: break-all;"><%= post.user.name %></td>
+              <td style="word-break: break-all;"><%= image_tag post.user.get_profile_image(100,100) %></td>
+              <td style="word-break: break-all;"><%= post.castle_name %></td>
+              <td style="word-break: break-all;"><%= post.body.truncate(50) %></td>
+              <td><%= link_to "詳細を見る", post_path(post), class: "btn btn-success" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+  
+  <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;">
+  </div>  
+  
 </div>
