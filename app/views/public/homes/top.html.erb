@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle Map</title>
 </head>
 
 <body style="margin: 0; height: 100%; ">
-    <div style="display: flex; justify-content: space-between; height: 30%;">
+    <div style="display: flex; justify-content: space-between; height: 25%;">
         <div style="background-image:url(<%= asset_path '二条城_1.jpeg' %>); background-size: cover; background-position: top; height: 100%; width: 20%; display: flex; justify-content: center; align-items: center; color: white; text-shadow: 1px 1px 2px black;">
             二条城
         </div>
@@ -24,16 +25,46 @@
         </div>
     </div>
     
-    <div style="height: 70%; display: flex; flex-direction: column;">
+    <div style="height: 75%; display: flex; flex-direction: column;">
         <div style="display: flex; flex: 1;">
             <div style="background-color: #B8860B; width: 10%; display: flex; ">
+            </div>
+            
+            <div style="width: 80%; display: flex; ">
+                
+                <div id="map" style = " height: 100%; width: 100%;"></div>
+                <script>
+                    // Google Maps APIスクリプトを動的に追加
+                    function loadGoogleMaps() {
+                        var script = document.createElement('script');
+                        script.src = `https://maps.googleapis.com/maps/api/js?key=<%= google_maps_api_key %>&callback=initMap`;
+                        document.head.appendChild(script);
+                    }
+                    // マップ初期化関数
+                    function initMap() {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 8,
+                            center: { lat: 35.682839, lng: 139.759455 } // 中心位置を設定（例：東京）
+                        });
+                        var castles = <%= @castles.to_json.html_safe %>;
+                        castles.forEach(function(castle) {
+                            var marker = new google.maps.Marker({
+                                position: { lat: castle.latitude, lng: castle.longitude },
+                                map: map,
+                                title: castle.name
+                            });
+                            marker.addListener('click', function() {
+                                window.location.href = castle.url;
+                            });
+                        });
+                    }
+                    // ページ読み込み時にGoogle Mapsをロード
+                    window.onload = loadGoogleMaps;
+                </script>
                 
             </div>
-            <div style="background-color: green; width: 80%; display: flex; ">
-                
-            </div>
+            
             <div style="background-color: #B8860B; width: 10%; display: flex; ">
-                
             </div>
         </div>
     </div>

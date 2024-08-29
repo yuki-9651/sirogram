@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   
   before_action :authenticate_user!, except: [:top], unless: :admin_controller? 
 
+
   private
  
   def configure_authentication
@@ -19,6 +20,7 @@ class ApplicationController < ActionController::Base
   def action_is_public?
     controller_name == 'homes' && action_name == 'top'
   end
+  
 
 
   

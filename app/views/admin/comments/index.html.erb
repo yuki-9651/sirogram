@@ -16,8 +16,8 @@
             <% @posts.each do |post| %>
               <% post.comments.each do |comment| %>
                 <tr style="height: auto;">
-                  <td style="word-break: break-all;">@<%= comment.user.name %></td>
-                  <td style="word-break: break-all;"><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+                  <td>@<%= comment.user.name %></td>
+                  <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
                   <td><%= post.user.name %></td>
                   <td><%= link_to post.castle_name, post_path(post) %></td>
                   <td><%= comment.comment.truncate(50) %></td>
