@@ -6,12 +6,20 @@
     <div class="col-lg-1" >
     </div>  
     <div  class="col-lg-8" >
-        <div style="padding-top: 30px;">
-          <%= form_with url: search_path, local: true, method: :get do |f| %>
-            <%= f.text_field :castle_name, placeholder: "検索" %>
-            <%= f.select :range, options_for_select([['ユーザー'], ['城名']], selected: params[:range]) %>
-            <%= f.submit "検索", class: "btn btn-primary" %>
-          <% end %>
+        <div style="padding-top: 30px; display: flex;">
+            <div style="padding-right:20px;">
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
+                <%= f.text_field :castle_name, placeholder: "検索" %>
+                <%= f.select :range, options_for_select([['ユーザー'], ['城名']], selected: params[:range]) %>
+                <%= f.submit "検索", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+            <div>
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
+                 <%= f.text_field :keyword, placeholder: "タグを検索 (例: #姫路城)" %>
+                 <%= f.submit "検索", class: "btn btn-primary" %>
+              <% end %>
+            </div>
         </div>
         <div style="display: flex; flex-wrap: wrap; padding-top: 30px; padding-bottom: 60px;  ">
               <% @post.each do |post| %>

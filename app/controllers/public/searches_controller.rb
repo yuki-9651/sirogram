@@ -7,8 +7,8 @@ class Public::SearchesController < ApplicationController
     
     if @range == 'ユーザー'
       @users = User.looks(params[:search], params[:castle_name])
-    elsif params[:keyword].present?
-      @posts = Post.where('tags.name LIKE ?', "%#{params[:keyword]}%")
+    elsif params[:keyword].present? && params[:keyword][0] == '#'
+      @posts = Post.joins(:tags).where('tags.tag_name LIKE ?', "%#{params[:keyword].delete('#')}%").distinct
     else
       @posts = Post.looks(params[:search], params[:castle_name])
     end
