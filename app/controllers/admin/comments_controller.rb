@@ -1,5 +1,5 @@
 class Admin::CommentsController < ApplicationController
-  
+   layout 'admin'
 
     def index
       @posts = Post.all

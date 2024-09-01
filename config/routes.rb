@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
     get 'searches', to: 'searches#search', as: 'search' 
+    resources :groups, except: [:destroy]
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
