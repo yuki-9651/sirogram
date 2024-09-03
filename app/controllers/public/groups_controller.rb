@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
   
     before_action :authenticate_user!
-    before_action :ensure_correct_user, only: [:edit, :update]
+    before_action :ensure_correct_user, only: [:edit, :update, :destroy]
     
     def index
       @post = Post.new 
@@ -18,9 +18,10 @@ class Public::GroupsController < ApplicationController
     end
   
     def create
-      @group = Group.new
+      #byebug
+      @group = Group.new(group_params)
       @group.owner_id = current_user.id
-      @user = User.find_by(name: params[:name])
+      @user = current_user.name
       
       if @group.save
         redirect_to groups_path
@@ -43,9 +44,10 @@ class Public::GroupsController < ApplicationController
     end
     
     def destroy
+      #byebug
       @group = Group.find(params[:id])
       @group.destroy
-      redirect_to posts_path
+      redirect_to groups_path
     end
   
     private
@@ -55,6 +57,7 @@ class Public::GroupsController < ApplicationController
     end
   
     def ensure_correct_user
+      byebug
       @group = Group.find(params[:id])
       unless @group.owner_id == current_user.id
         redirect_to groups_path
