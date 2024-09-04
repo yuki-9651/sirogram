@@ -1,0 +1,37 @@
+<div style = "height: 30%; background-color: #B8860B; ">  
+     <div style = "display:flex; margin:30px;"> 
+     
+        <div style = "margin-right:80px; ">
+          <div style = "background-color: white; padding:10px; margin-bottom:10px; ">    
+           <div style = "display:flex;">
+             <div style = "margin-right:10px;">
+               <%= link_to user_show_by_name_path(@name) do %>
+                 <%= image_tag @group.get_image, size:"100x100" %>
+               <% end %>
+             </div>             
+             <div>
+                 <h5>グループ名</h5>
+                 <h3 style = "margin-bottom:20px;">
+                   <%= @group.group_name.truncate(30) %>
+                 </h3>
+             </div>
+           </div>
+          </div>
+          <div style = "display:flex;">
+               
+               <div><h6>グループ作成者</h6></div> 
+               <div><h4><%= @name %></h4></div>
+               
+          </div>
+           
+        </div>
+        
+        <div>
+          <div style = "word-wrap: break-word; word-break: break-all;">
+            <h5><%= @group.group_introduction.truncate(500) %></h5>
+          </div>
+        </div> 
+    
+     </div>
+</div>
+

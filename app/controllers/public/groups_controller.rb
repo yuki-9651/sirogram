@@ -11,6 +11,7 @@ class Public::GroupsController < ApplicationController
     def show
       @post = Post.new 
       @group = Group.find(params[:id])
+      @name = User.find(@group.owner_id).name
     end
   
     def new
@@ -44,7 +45,6 @@ class Public::GroupsController < ApplicationController
     end
     
     def destroy
-      #byebug
       @group = Group.find(params[:id])
       @group.destroy
       redirect_to groups_path
@@ -57,7 +57,7 @@ class Public::GroupsController < ApplicationController
     end
   
     def ensure_correct_user
-      byebug
+      #byebug
       @group = Group.find(params[:id])
       unless @group.owner_id == current_user.id
         redirect_to groups_path
