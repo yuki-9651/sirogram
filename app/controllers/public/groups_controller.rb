@@ -11,7 +11,14 @@ class Public::GroupsController < ApplicationController
     def show
       @post = Post.new 
       @group = Group.find(params[:id])
-      @name = User.find(@group.owner_id).name
+      @owner_name = User.find(@group.owner_id).name
+      @user_names = @group.users.pluck(:name)
+    end
+    
+    def join
+      @group = Group.find(params[:id])
+      @group.users << current_user
+      redirect_to  groups_path
     end
   
     def new
@@ -23,7 +30,7 @@ class Public::GroupsController < ApplicationController
       @group = Group.new(group_params)
       @group.owner_id = current_user.id
       @user = current_user.name
-      
+      @group.users << current_user
       if @group.save
         redirect_to groups_path
       else
@@ -46,7 +53,7 @@ class Public::GroupsController < ApplicationController
     
     def destroy
       @group = Group.find(params[:id])
-      @group.destroy
+      @group.users.delete(current_user)
       redirect_to groups_path
     end
   

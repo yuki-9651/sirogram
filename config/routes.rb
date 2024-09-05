@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
     get 'searches', to: 'searches#search', as: 'search' 
-    resources :groups, only: [:new, :create, :index, :show, :destroy, :edit, :update]
+    resources :groups, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
+      get "join" => "groups#join"
+    end
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]

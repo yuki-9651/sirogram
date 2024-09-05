@@ -1,3 +1,4 @@
+<%#グループ詳細部%>
 <div style = "height: 30%; background-color: #B8860B; ">  
      <div style = "display:flex; margin:30px;"> 
      
@@ -5,7 +6,7 @@
           <div style = "background-color: white; padding:10px; margin-bottom:10px; ">    
            <div style = "display:flex;">
              <div style = "margin-right:10px;">
-               <%= link_to user_show_by_name_path(@name) do %>
+               <%= link_to user_show_by_name_path(@owner_name) do %>
                  <%= image_tag @group.get_image, size:"100x100" %>
                <% end %>
              </div>             
@@ -17,21 +18,56 @@
              </div>
            </div>
           </div>
-          <div style = "display:flex;">
-               
-               <div><h6>グループ作成者</h6></div> 
-               <div><h4><%= @name %></h4></div>
-               
+          <div style = "display:flex; justify-content: space-between;">
+              <div> 
+               <div><h6>【グループ作成者】</h6></div> 
+               <div><h4><%= @owner_name %></h4></div>
+              </div>
+              <div>
+               <div style = "margin:20px; padding-right:50px;">
+                  <% if @group.users.include?(current_user) %>
+                    <%= link_to 'グループ退会', group_path(@group), method: :delete, class: "btn btn btn-danger" %>
+                  <% else %>
+                    <%= link_to 'グループ参加', group_join_path(@group), class: "btn btn btn-success" %>
+                  <% end %>
+               </div>
+              </div>
           </div>
            
         </div>
         
         <div>
           <div style = "word-wrap: break-word; word-break: break-all;">
-            <h5><%= @group.group_introduction.truncate(500) %></h5>
+            <h5><b>【グループ説明】</b></h5>
+            <h5><%= @group.group_introduction.truncate(400) %></h5>
           </div>
         </div> 
     
      </div>
 </div>
 
+<%#グループユーザー一覧部%>
+<div style="height: 70%; display: flex; align-items: stretch; ">
+    <div>
+      <h2>グループユーザー一覧</h2>
+ 
+    <table class="table table-hover table-inverse">
+        <thead class="thead-dark">
+          <tr>
+            <th></th>
+            <th>ユーザー名</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_names.each do |user_names| %>
+            <tr style="height: auto;">
+              <td style="word-break: break-all;"><%= image_tag @user_names.get_image(50,50) %></td>
+              <td style="word-break: break-all;"><%= @user_names.truncate(50) %></td>
+              <td><%= link_to "詳細を見る", user_show_by_name_path(@user_names), class: "btn btn-success" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </div>     
+</div>
