@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
   
     before_action :authenticate_user!
-    before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+    before_action :ensure_correct_user, only: [:edit, :update]
     
     def index
       @post = Post.new 
@@ -9,14 +9,15 @@ class Public::GroupsController < ApplicationController
     end
   
     def show
-      @post = Post.new 
+      #byebug
       @group = Group.find(params[:id])
+      @users = @group.users
       @owner_name = User.find(@group.owner_id).name
-      @user_names = @group.users.pluck(:name)
     end
     
     def join
-      @group = Group.find(params[:id])
+      #byebug
+      @group = Group.find(params[:group_id])
       @group.users << current_user
       redirect_to  groups_path
     end

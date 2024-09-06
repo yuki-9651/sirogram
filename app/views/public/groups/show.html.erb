@@ -47,11 +47,11 @@
 </div>
 
 <%#グループユーザー一覧部%>
-<div style="height: 70%; display: flex; align-items: stretch; ">
+<div style="height: 70%; margin:20px">
     <div>
       <h2>グループユーザー一覧</h2>
  
-    <table class="table table-hover table-inverse">
+    <table class="table table-hover table-inverse" style = "width: 100%;">
         <thead class="thead-dark">
           <tr>
             <th></th>
@@ -61,13 +61,13 @@
           </tr>
         </thead>
         <tbody>
-          <% @user_names.each do |user_names| %>
-            <tr style="height: auto;">
-              <td style="word-break: break-all;"><%= image_tag @user_names.get_image(50,50) %></td>
-              <td style="word-break: break-all;"><%= @user_names.truncate(50) %></td>
-              <td><%= link_to "詳細を見る", user_show_by_name_path(@user_names), class: "btn btn-success" %></td>
-            </tr>
-          <% end %>
+            <% @users.each do |user| %>
+              <tr style="height: auto;">
+                <td style="word-break: break-all;"><%= image_tag user.get_profile_image(100,100) %></td>
+                <td style="word-break: break-all;"><%= user.name.truncate(50) %></td>
+                <td><%= link_to "詳細を見る", user_show_by_name_path(user.name), class: "btn btn-success" %></td>
+              </tr>
+            <% end %>
         </tbody>
     </div>     
 </div>
