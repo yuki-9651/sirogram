@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :group_membership, dependent: :destroy
   has_many :groups, through: :group_membership
+  has_many :permits, dependent: :destroy
   
   has_one_attached :profile_image
   attr_accessor :remove_profile_image

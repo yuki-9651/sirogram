@@ -1,8 +1,13 @@
 class Public::GroupsController < ApplicationController
   
     before_action :authenticate_user!
-    before_action :ensure_correct_user, only: [:edit, :update]
+    before_action :ensure_correct_user, only: [:edit, :update, :permits]
     
+    def permits
+      @group = Group.find(params[:id])
+      @permits = @group.permits.page(params[:page])
+    end
+  
     def index
       @post = Post.new 
       @groups = Group.all
@@ -65,10 +70,9 @@ class Public::GroupsController < ApplicationController
     end
   
     def ensure_correct_user
-      #byebug
       @group = Group.find(params[:id])
       unless @group.owner_id == current_user.id
-        redirect_to groups_path
+        redirect_to group_path(@group), alert: "グループオーナーのみ編集が可能です"
       end
     end
     

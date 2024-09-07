@@ -23,8 +23,11 @@ Rails.application.routes.draw do
     get 'homes/top' => 'homes#top'
     get 'searches', to: 'searches#search', as: 'search' 
     resources :groups, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
+      resource :permits, only: [:create, :destroy] 
       get "join" => "groups#join"
     end
+    get "groups/:id/permits" => "groups#permits", as: :permits
+    
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]

@@ -25,10 +25,12 @@
               </div>
               <div>
                <div style = "margin:20px; padding-right:50px;">
-                  <% if @group.users.include?(current_user) %>
-                    <%= link_to 'グループ退会', group_path(@group), method: :delete, class: "btn btn btn-danger" %>
+                  <% if @group.users.exists?(id: current_user.id) %>
+                    <%= link_to 'グループ退出', group_path(@group), method: :delete, class: "btn btn btn-danger", data: { confirm: "本当にグループを退出しますか？" } %>
+                  <% elsif @group.permits.exists?(id: current_user.id) %>
+                    <%= link_to '申請取消', group_permits_path(@group), method: :delete, class: "btn btn btn-danger" %>
                   <% else %>
-                    <%= link_to 'グループ参加', group_join_path(@group), class: "btn btn btn-success" %>
+                    <%= link_to '加入申請', group_permits_path(@group), method: :post, class: "btn btn btn-success" %>
                   <% end %>
                </div>
               </div>
@@ -69,5 +71,21 @@
               </tr>
             <% end %>
         </tbody>
-    </div>     
+    </div> 
+    
+        <% if @group.owner_id == current_user.id %>
+            <div class="dropdown">
+            <button class="btn btn-sm btn-secondary dropdown-toggle"
+                    type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              オーナー専用
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <%= link_to "承認待ち一覧", permits_path, class: "dropdown-item text-secondary bg-transparent" %>
+              <%= link_to 'グループ編集', edit_group_path(@group),  class: "dropdown-item text-success bg-transparent" %>
+              <%= link_to 'グループ削除', group_path(@group), method: :delete,  class: "dropdown-item text-danger bg-transparent", data: { confirm: "本当に削除しますか？" } %>
+            </div>
+          </div>
+        <% end %>
+    
 </div>
