@@ -39,7 +39,7 @@
                     <%= link_to 'マイページ', user_show_by_name_path(current_user.name), class: 'nav-link text-light' %>
                   <% end %>
                 </li>
-
+                
               <% else %>
                 <li class="nav-item">
                   <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light' %>

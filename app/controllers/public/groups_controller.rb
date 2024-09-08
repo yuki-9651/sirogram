@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
-  
+    
     before_action :authenticate_user!
-    before_action :ensure_correct_user, only: [:edit, :update, :permits]
+    before_action :ensure_correct_user, only: [:edit, :update, :destroy, :permits]
     
     def permits
       @group = Group.find(params[:id])
@@ -23,8 +23,11 @@ class Public::GroupsController < ApplicationController
     def join
       #byebug
       @group = Group.find(params[:group_id])
-      @group.users << current_user
-      redirect_to  groups_path
+      if !@group.users.exists?(id: current_user.id)
+        @group.users << current_user
+      end
+      redirect_to groups_path
+      
     end
   
     def new
@@ -50,6 +53,7 @@ class Public::GroupsController < ApplicationController
     end
   
     def update
+      @group = Group.find(params[:id])
       if @group.update(group_params)
         redirect_to groups_path
       else
