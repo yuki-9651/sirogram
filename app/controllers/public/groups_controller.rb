@@ -16,7 +16,7 @@ class Public::GroupsController < ApplicationController
     def show
       #byebug
       @group = Group.find(params[:id])
-      @users = @group.users
+      @users = @group.users.where.not(id: @group.owner_id)
       @owner_name = User.find(@group.owner_id).name
     end
     
@@ -63,7 +63,7 @@ class Public::GroupsController < ApplicationController
     
     def destroy
       @group = Group.find(params[:id])
-      @group.users.delete(current_user)
+      @group.destroy
       redirect_to groups_path
     end
   
