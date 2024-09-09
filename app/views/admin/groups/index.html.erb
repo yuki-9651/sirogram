@@ -1,0 +1,25 @@
+<div style = "margin:10px;">
+    <h3>全グループ一覧</h3>
+    <table class="table table-hover table-inverse">
+        
+        <tbody>
+          
+          <thead class="thead-dark">
+            <tr>
+              <th>グループ</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          
+          <% @groups.each do |group| %>
+              <tr style="height: auto;">
+                <td><%= link_to group.group_name, group_path(group) %></td>
+                <td><%= link_to '削除', admin_group_path(group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn btn-success" %> </td>
+              </tr>
+          <% end %> 
+          
+        </tbody>
+        
+    </table>
+</div>

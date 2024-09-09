@@ -9,9 +9,15 @@
 </head>
 <body>
   <% if admin_signed_in? %>
-    <div style = "padding:20px; display:flex; justify-content: flex-end;">
+    <div class="shadow-sm navbar navbar-expand-lg navbar-dark bg-dark" style = "padding:20px; display:flex; justify-content: flex-end; ">
+      <div style = "padding-right:20px;">
+        <%= link_to 'ダッシュボード', admin_dashboards_path, class: "btn btn-primary"%>
+      </div>
       <div style = "padding-right:20px;">
         <%= link_to 'コメント一覧', admin_comments_path, class: "btn btn-warning"%>
+      </div>
+      <div style = "padding-right:20px;">
+        <%= link_to 'グループ一覧', admin_groups_path, class: "btn btn-info"%>
       </div>
       <div>
         <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete , class: "btn btn-secondary" %>
