@@ -1,31 +1,39 @@
-      <table class="table table-hover table-inverse">
-          
-          <tbody>
-            
-            <thead class="thead-dark">
-              <tr>
-                <th>コメント者</th>
-                <th>日時</th>
-                <th>投稿主</th>
-                <th>投稿</th>
-                <th>コメント</th>
-                <th></th>
-              </tr>
-            </thead>
-            
-            <% @posts.each do |post| %>
-              <% post.comments.each do |comment| %>
-                <tr style="height: auto;">
-                  <td>@<%= comment.user.name %></td>
-                  <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
-                  <td><%= post.user.name %></td>
-                  <td><%= link_to post.castle_name, post_path(post) %></td>
-                  <td><%= comment.comment.truncate(50) %></td>
-                  <td><%= link_to "削除", admin_comment_path(comment), method: :delete, class: "btn btn-success", data: { confirm: "本当に削除しますか？" } %></td>
+<div style=" display: flex; align-items: stretch;">   
+    <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;" >
+    </div>    
+    
+    <div class="col-lg-10" style = "margin:10px;">
+        <h3>全コメント一覧</h3>
+        <table class="table table-hover table-inverse">
+              
+              <thead class="thead-dark">
+                <tr>
+                  <th>コメント者</th>
+                  <th>日時</th>
+                  <th>投稿主</th>
+                  <th>投稿</th>
+                  <th>コメント</th>
+                  <th></th>
                 </tr>
-              <% end %>
-            <% end %> 
+              </thead>
+              
+              <tbody>
+                  <% @comments.each do |comment| %>
+                    <tr style="height: auto;">
+                      <td><%= link_to comment.user.name, user_show_by_name_path(comment.user.name) %></td>
+                      <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+                      <td><%= link_to comment.post.user.name, user_show_by_name_path(comment.post.user.name) %></td>
+                      <td><%= link_to comment.post.castle_name, post_path(comment.post) %></td>
+                      <td><%= comment.comment.truncate(50) %></td>
+                      <td><%= link_to "削除", admin_comment_path(comment), method: :delete, class: "btn btn-success", data: { confirm: "本当に削除しますか？" } %></td>
+                    </tr>
+                  <% end %>
+              </tbody>
             
-          </tbody>
-          
-      </table>
+        </table>
+        <%= paginate @comments, theme: 'bootstrap-5' %> 
+    </div>
+    
+    <div class="col-lg-1" style="background-color: #B8860B; min-height: 100vh;" >
+    </div>  
+</div>

@@ -1,11 +1,12 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!, unless: :admin_signed_in?
 
   def show
     @user = User.find_by(name: params[:name])
   
     if @user
       @name = @user.name
-      @posts = @user.posts.page(params[:page])
+      @posts = @user.posts.page(params[:page]).per(15)
     else
       redirect_to root_path
     end
@@ -38,6 +39,11 @@ class Public::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :remove_profile_image)
+  end
+  
+  def admin_signed_in?
+
+    super 
   end
   
 end

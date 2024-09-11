@@ -20,12 +20,14 @@
       </b>
     </div>
     <div style = "padding:20px; margin-left: auto;">
+      <% if @user == current_user %>
         <div style = "padding-bottom:10px;">
            <%= link_to 'グループを作成する', new_group_path, class: "btn btn-info" %>
         </div>
         <div>
            <%= link_to 'グループ一覧', groups_path, class: "btn btn-info" %>
         </div>
+      <% end %>
     </div>
       
   </div>
@@ -38,20 +40,20 @@
     <div class="col-lg-2" >
     </div>   
     
-    <div class="col-lg-8" style="display: flex; flex-wrap: wrap; ">
-      
-      <% @posts.each do |posts| %>
-        <div style="width: 30%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
-          
-          <%= link_to post_path(posts.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
-            <%= image_tag posts.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
-          <% end %>
-          
-        </div>
-      <% end %>
-      
-      <%= paginate @posts %>
-      
+    <div class="col-lg-8">
+      <div style="display: flex; flex-wrap: wrap; ">
+        <% @posts.each do |posts| %>
+          <div style="width: 30%; padding-bottom: 30%; position: relative; margin: 0.1%; overflow: hidden;">
+            
+            <%= link_to post_path(posts.id), style: 'display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0;' do %>
+              <%= image_tag posts.get_image, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div style="margin-top:20px;">
+        <%= paginate @posts, theme: 'bootstrap-5' %>
+      </div>
     </div>
     
     <div class="col-lg-2" >

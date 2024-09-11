@@ -7,25 +7,37 @@
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
+
 <body>
-  <% if admin_signed_in? %>
-    <div class="shadow-sm navbar navbar-expand-lg navbar-dark bg-dark" style = "padding:20px; display:flex; justify-content: flex-end; ">
-      <div style = "padding-right:20px;">
-        <%= link_to 'ダッシュボード', admin_dashboards_path, class: "btn btn-primary"%>
-      </div>
-      <div style = "padding-right:20px;">
-        <%= link_to 'コメント一覧', admin_comments_path, class: "btn btn-warning"%>
-      </div>
-      <div style = "padding-right:20px;">
-        <%= link_to 'グループ一覧', admin_groups_path, class: "btn btn-info"%>
-      </div>
-      <div>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete , class: "btn btn-secondary" %>
-      </div>
-    </div>
-  <% end %>
-  
-    
-  <%= yield %>
+      <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand p-3" href="/homes/top" >
+            <h1 style="font-family: 'Impact', sans-serif; font-size: 30px; color: white; margin: 0; ">Sirogram</h1>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if admin_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to 'ダッシュボード', admin_dashboards_path, class: "nav-link text-light"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'コメント一覧', admin_comments_path, class: "nav-link text-light"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'グループ一覧', admin_groups_path, class: "nav-link text-light"%>
+                </li>
+                <li class="nav-item">
+                    <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, data: { confirm: 'ログアウトしてよろしいですか？' } , class: "nav-link text-light" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+      </nav>
+    </header>
+    <%= yield %>
 </body>
 </html>

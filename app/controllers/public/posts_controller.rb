@@ -22,7 +22,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @post = Post.page(params[:page])
+    @post = Post.page(params[:page]).per(15)
     
     if params[:search].present?
       posts = Post.posts_serach(params[:search])

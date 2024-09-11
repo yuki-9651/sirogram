@@ -10,7 +10,7 @@ class Public::GroupsController < ApplicationController
   
     def index
       @post = Post.new 
-      @groups = Group.all
+      @groups = Group.page(params[:page]).per(30)
     end
   
     def show

@@ -21,7 +21,4 @@ class ApplicationController < ActionController::Base
     controller_name == 'homes' && action_name == 'top'
   end
   
-
-
-  
 end

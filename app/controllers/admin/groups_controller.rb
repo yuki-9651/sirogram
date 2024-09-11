@@ -3,7 +3,7 @@ class Admin::GroupsController < ApplicationController
   layout 'admin' 
   
   def index
-    @groups = Group.all
+    @groups = Group.page(params[:page])
   end
   
   def destroy

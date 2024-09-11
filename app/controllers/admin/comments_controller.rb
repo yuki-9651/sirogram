@@ -2,7 +2,7 @@ class Admin::CommentsController < ApplicationController
    layout 'admin'
 
     def index
-      @posts = Post.all
+      @comments = Comment.includes(:user, :post).page(params[:page])
     end
     
     def destroy
