@@ -39,6 +39,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @user = @post.user
+    @tags = @post.tags  
     @comment = Comment.new
   end
   

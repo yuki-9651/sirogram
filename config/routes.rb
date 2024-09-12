@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resources :comments, only: [:create, :destroy]
       resource :likes, only: [:create, :destroy]
+      collection do
+        get 'tag_search', to: 'searches#search'
+      end
     end
     get '/users/:name', to: 'users#show', as: 'user_show_by_name'
     get '/users/:user_name/edit', to: 'users#edit', as: 'edit_user_by_name'

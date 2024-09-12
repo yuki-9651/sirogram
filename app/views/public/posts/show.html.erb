@@ -26,8 +26,16 @@
           <div style = "word-wrap: break-word; word-break: break-all;">
             <h5><%= @post.body %></h5>
           </div>
+          
+          <div style = "margin-top:30px;">
+            <% @tags.each do |tag| %>
+              <span><%= link_to tag.tag_name, tag_search_posts_path(tag_name: tag.tag_name) %></span>
+            <% end %>
+          </div>
         </div> 
-    
+        
+
+        
      </div>
     <% if @post.favorited_by?(current_user) %>
       
@@ -40,7 +48,7 @@
       <% else %>
       
       <p class="not-liked" style = "color:white;">
-        <%= link_to post_likes_path(@post), method: :post, style: "color: white;"  do %>
+        <%= link_to post_likes_path(@post), method: :post, style: "color: white;" do %>
           ♡<%= @post.likes.count %> いいね
         <% end %>
       </p>
