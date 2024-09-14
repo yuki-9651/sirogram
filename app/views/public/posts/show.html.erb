@@ -29,7 +29,7 @@
           
           <div style = "margin-top:30px;">
             <% @tags.each do |tag| %>
-              <span><%= link_to tag.tag_name, tag_search_posts_path(tag_name: tag.tag_name) %></span>
+              <span><%= link_to tag.tag_name, tag_search_posts_path(tag_name: tag.tag_name), class: "btn btn-info" %></span>
             <% end %>
           </div>
         </div> 
