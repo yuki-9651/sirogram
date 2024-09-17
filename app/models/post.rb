@@ -41,9 +41,10 @@ class Post < ApplicationRecord
    new_tags = tags - current_tags
 
    # Destroy
-   old_tags.each do |old_name|
-     self.tags.delete Tag.find_by(tag_name:old_name)
-   end
+    old_tags.each do |old|
+      tag = Tag.find_by(tag_name: old)
+      self.tags.delete(tag) if tag.present? # nilチェックを追加
+    end
 
    # Create
    new_tags.each do |new_name|

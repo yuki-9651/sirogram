@@ -45,15 +45,18 @@ class Public::PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
+    @tag_names = @post.tags.pluck(:tag_name).join(' ') 
   end
   
   def update
     @post= Post.find(params[:id])
-
+    tag_list = params[:post][:tag_name].split(nil)
+    
     if @post.update(post_params)
+      @post.save_posts(tag_list) 
       redirect_to  post_path(@post) 
     else
-      render :new
+      render :edit
     end
   end
   

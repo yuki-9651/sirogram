@@ -25,5 +25,9 @@ class User < ApplicationRecord
   def self.looks(search, name)
     User.where("name LIKE ?", "%#{name}%")
   end
+  
+  def active_for_authentication?
+    super && (is_active == true)
+  end
 
 end
