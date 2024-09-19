@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about', as: 'about'
     get 'homes/top' => 'homes#top'
     get 'searches', to: 'searches#search', as: 'search' 
+    get  '/users/check' => 'users#check'
     patch  '/users/withdraw' => 'users#withdraw'
     resources :groups, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
       resource :permits, only: [:create, :destroy] 

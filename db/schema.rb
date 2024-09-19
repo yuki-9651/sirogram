@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 2024_09_09_032914) do
     t.integer "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id", "user_id"], name: "index_group_memberships_on_group_id_and_user_id", unique: true
   end
 
   create_table "groups", force: :cascade do |t|
@@ -130,11 +129,10 @@ ActiveRecord::Schema.define(version: 2024_09_09_032914) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
-    t.boolean "is_active"
+    t.string "name", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "profile_image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
