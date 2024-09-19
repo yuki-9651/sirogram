@@ -19,7 +19,7 @@
           <%= link_to "退会しない", root_path, :class => "btn btn-primary ms-3" %>
         </div>
         <div>
-          <%= link_to "退会する", users_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+          <%= link_to "退会する", withdraw_user_path(current_user.name), method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
         </div>
       </div>
   
