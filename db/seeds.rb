@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Admin.create(
+   email: 'admin@example.com',
+)
+
 Castle.create([
     { name: "姫路城", latitude: 34.8397249574366, longitude: 134.693807797632, url: "/searches?keyword=%23姫路城" },
     { name: "松本城", latitude: 36.2386936010231, longitude: 137.96886118346, url: "/searches?keyword=%23松本城" },
