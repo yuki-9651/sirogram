@@ -21,7 +21,15 @@
     </div>
     <div style = "padding:20px; margin-left: auto;">
       <% if @user == current_user %>
-
+        <div style = "padding-bottom:10px;">
+           <%= link_to 'グループを作成する', new_group_path, class: "btn btn-info" %>
+        </div>
+        <div style = "padding-bottom:10px;">
+           <%= link_to 'グループ一覧', groups_path, class: "btn btn-info" %>
+        </div>
+        <div>
+          <%= link_to "退会する", users_check_path, class: "btn btn-danger ms-3"%>
+        </div>
       <% end %>
     </div>
       
