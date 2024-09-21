@@ -21,6 +21,8 @@ class Public::UsersController < ApplicationController
       redirect_to user_path
     end
   end
+  def check
+  end
   
   def withdraw
     @user = User.find(current_user.id)
