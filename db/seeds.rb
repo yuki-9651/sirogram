@@ -6,9 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create(
-   email: 'admin@example.com',
+admin = Admin.new(
+  email: 'admin@example.com'
 )
+admin.password = 'password' 
+admin.save
 
 Castle.create([
     { name: "姫路城", latitude: 34.8397249574366, longitude: 134.693807797632, url: "/searches?keyword=%23姫路城" },
