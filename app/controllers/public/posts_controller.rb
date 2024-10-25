@@ -54,6 +54,7 @@ class Public::PostsController < ApplicationController
     
     if @post.update(post_params)
       @post.save_posts(tag_list) 
+      sleep(3) 
       redirect_to  post_path(@post) 
     else
       render :edit
